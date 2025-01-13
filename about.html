@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Night City Roleplay</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff1493;
+            --secondary: #00487c;
+            --accent: #4FB0FF;
+            --dark: #000B18;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 11, 24, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .youtube-btn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .youtube-btn:hover {
+            transform: scale(1.1);
+            background: #ff0000;
+        }
+
+        .youtube-btn i {
+            color: var(--light);
+            font-size: 1.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section:nth-child(even) {
+            background: rgba(0, 72, 124, 0.1);
+            flex-direction: row-reverse;
+        }
+
+        .content-text {
+            flex: 1;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .content-text.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .content-media {
+            flex: 1;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .content-media.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .content-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .content-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(255, 20, 147, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateX(10px);
+        }
+
+        .content-media img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .content-media img:hover {
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 11, 24, 0.95);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            animation: gradientMove 5s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+                padding: 4rem 2rem;
+            }
+
+            .content-section:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="application.html">Application</a>
+        <a href="shop.html">Shop</a>
+        <a href="socials.html">Socials</a>
+    </div>
+
+    <a href="https://youtube.com" target="_blank" class="youtube-btn">
+        <i class="fab fa-youtube"></i>
+    </a>
+
+    <div class="hero">
+        <h1>About Night City Roleplay</h1>
+        <p>Where Stories Come to Life</p>
+    </div>
+
+    <section class="content-section">
+        <div class="content-text">
+            <h2>Our Journey</h2>
+            <p>Started in 2023, Night City Roleplay has grown into one of the most immersive gaming communities. Our dedication to creating authentic experiences sets us apart.</p>
+            <div class="highlight-box">
+                <h3>Community First</h3>
+                <p>We believe in building a strong, inclusive community where every player's story matters.</p>
+            </div>
+        </div>
+        <div class="content-media">
+            <img src="https://media.discordapp.net/attachments/1167871120419074173/1327930335018876989/image.png?ex=67862c7f&is=6784daff&hm=fd8bf4b8e1eaa5b434c0cf0eb04dfe54cad18f38c7ffab696a53062caaf62413&=&format=webp&quality=lossless&width=1100&height=404" alt="Night City Community">
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="content-text">
+            <h2>Immersive Experience</h2>
+            <p>From dynamic weather systems to realistic economics, every detail is crafted to enhance your roleplay experience.</p>
+            <div class="highlight-box">
+                <h3>Features</h3>
+                <p>Custom character creation, dynamic economy, faction warfare, and more!</p>
+            </div>
+        </div>
+        <div class="content-media">
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <iframe class="fas fa-play" width="100%" height="100%" src="https://www.youtube.com/embed/Hw_J1KdjJlE?si=x_CnJm-Q-JHIjePT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="content-text">
+            <h2>Community Events</h2>
+            <p>Regular events, competitions, and activities keep our community engaged and entertained. Join massive city-wide events or intimate character-driven storylines.</p>
+            <div class="highlight-box">
+                <h3>Weekly Events</h3>
+                <p>From racing tournaments to underground fight clubs, there's always something happening in Night City.</p>
+            </div>
+        </div>
+        <div class="content-media">
+            <img src="https://media.discordapp.net/attachments/1324840760901898260/1325969114224791634/REDESIGNED_NIGHT_CITY_MAP.PNG?ex=67864a38&is=6784f8b8&hm=7e8f542c931182fc5cd101c83110953e8a9b42b0c42844b93f5246158e0c9898&=&format=webp&quality=lossless&width=1464&height=1464" alt="Community Events">
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="content-text">
+            <h2>Join Our World</h2>
+            <p>Whether you're a seasoned roleplayer or new to the scene, Night City welcomes all who seek adventure. Our experienced staff and helpful community will guide you every step of the way.</p>
+            <div class="highlight-box">
+                <h3>Getting Started</h3>
+                <p>Easy application process, helpful tutorials, and dedicated support team to help you begin your journey.</p>
+            </div>
+        </div>
+        <div class="content-media">
+            <div class="video-container">
+                <div class="video-placeholder">
+                   <iframe class="fas fa-play" width="100%" height="100%" src="https://www.youtube.com/embed/u-hnPArGJAo?si=y8wluP2Bs50VjvPM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for content sections
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-text, .content-media').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '1rem';
+                navbar.style.background = 'rgba(0, 11, 24, 0.95)';
+            } else {
+                navbar.style.padding = '1.5rem';
+                navbar.style.background = 'rgba(0, 11, 24, 0.9)';
+            }
+        });
+
+        // Add floating elements
+        function createFloatingElements() {
+            const shapes = ['■', '●', '▲', '◆'];
+            const container = document.body;
+
+            shapes.forEach((shape, index) => {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = shape;
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animation = `float ${100 + index}s infinite ease-in-out`;
+                container.appendChild(element);
+            });
+        }
+
+        createFloatingElements();
+    </script>
+</body>
+</html>

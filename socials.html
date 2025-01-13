@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socials - Night City Roleplay</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+:root {
+    --neon-pink: #ff2d55;
+    --neon-blue: #0af;
+    --neon-purple: #b829ff;
+    --neon-green: #00ff9d;
+    --youtube-color: red;
+    --discord-color: #5865F2;
+    --instagram-color: #E4405F;
+    --twitter-color: #1DA1F2;
+    --dark-bg: #0a0a0f;
+    --glass-bg: rgba(16, 16, 32, 0.7);
+    --text-primary: #fff;
+    --text-secondary: #99e9ff;
+    --card-width: 350px;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 45, 85, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(0, 170, 255, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(184, 41, 255, 0.1) 0%, transparent 40%);
+    animation: backgroundPulse 10s ease infinite alternate;
+    z-index: -1;
+}
+
+/* Grid Overlay Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 99%, rgba(255, 255, 255, 0.1) 1%) 0 0 / 50px 50px,
+        linear-gradient(transparent 99%, rgba(255, 255, 255, 0.1) 1%) 0 0 / 50px 50px;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Page Title */
+h1 {
+    text-align: center;
+    font-size: 3.5em;
+    margin: 40px 0;
+    background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    position: relative;
+}
+.connect_with_community p {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 40px 0;
+    background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    position: relative;
+}
+
+/* Horizontal Cards Container */
+.social-cards {
+    display: flex;
+    gap: 30px;
+    padding: 40px;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 500px;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+/* Card Base Styles */
+.social-card {
+    width: var(--card-width);
+    background: var(--glass-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: scroll;
+    flex-wrap: wrap;
+    transform-style: preserve-3d;
+    animation: cardEntrance 0.8s ease forwards;
+    opacity: 0;
+}
+
+.social-card:nth-child(1) { animation-delay: 0.2s; }
+.social-card:nth-child(2) { animation-delay: 0.4s; }
+.social-card:nth-child(3) { animation-delay: 0.6s; }
+.social-card:nth-child(4) { animation-delay: 0.8s; }
+
+/* Card Header */
+.card-header {
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Platform Icon */
+.platform-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent);
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+/* Latest Update Section */
+.latest-update {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+.update-content {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+
+.update-time {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.update-time i {
+    font-size: 0.9em;
+}
+
+/* Platform Specific Styles */
+.discord .platform-icon {
+    background: linear-gradient(45deg, #5865F2,#5865F2 );
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+}
+
+.instagram .platform-icon {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    box-shadow: 0 0 20px rgba(228, 64, 95, 0.3);
+}
+
+.twitter .platform-icon {
+    background: linear-gradient(45deg, #1DA1F2, #1DA1F2);
+    box-shadow: 0 0 20px rgba(29, 161, 242, 0.3);
+}
+.youtube .platform-icon {
+    background: linear-gradient(45deg, red, red);
+    box-shadow: 0 0 20px rgba(255, 2, 2, 0.3);
+}
+
+/* Follow Button */
+.follow-btn {
+    margin: 20px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 1.1em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.follow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+/* Hover Effects */
+.social-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.social-card:hover .platform-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.follow-btn:hover::before {
+    left: 100%;
+    transition: 0.5s;
+}
+
+.discord .follow-btn:hover {
+    background: var(--discord-color);
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+}
+
+.instagram .follow-btn:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    box-shadow: 0 0 20px rgba(228, 64, 95, 0.4);
+}
+
+.twitter .follow-btn:hover {
+    background: var(--twitter-color);
+    box-shadow: 0 0 20px rgba(29, 161, 242, 0.4);
+}
+.youtube .follow-btn:hover {
+    background: red;
+    box-shadow: 0 0 20px rgba(242, 29, 29, 0.4);
+}
+
+/* Animations */
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(100px) rotate3d(1, 0, 0, 45deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate3d(0, 0, 0, 0);
+    }
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                     0 0 20px var(--neon-pink),
+                     0 0 30px var(--neon-blue);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.7),
+                     0 0 40px var(--neon-pink),
+                     0 0 60px var(--neon-blue);
+    }
+}
+
+@keyframes backgroundPulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 0.7; transform: scale(1.1); }
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+@keyframes iconPulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(0.8); opacity: 0.3; }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .social-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-card {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+    </div>
+    <h1>Socials</h1>
+    <div class="connect_with_community">
+        <p>Connect with our community</p>
+    </div>  
+    
+    <div class="social-cards">
+        <!-- Discord Card -->
+        <div class="social-card discord">
+            <div class="card-header">
+                <div class="platform-icon">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <div class="platform-name">Discord</div>
+            </div>
+            <div class="latest-update">
+                <div class="update-title">Latest Announcement</div>
+                <div class="update-content">
+                    Welcome to Night City Roleplay! Join our growing community of cyberpunk enthusiasts.
+                </div>
+                <div class="update-time">2 hours ago</div>
+            </div>
+            <a href="https://discord.gg/ssTkTN8ZDn" class="follow-btn">Join Server</a>
+        </div>
+
+        <!-- Instagram Card -->
+        <div class="social-card instagram">
+            <div class="card-header">
+                <div class="platform-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="platform-name">Instagram</div>
+            </div>
+            <div class="latest-update">
+                <div class="update-title">Latest Post</div>
+                <div class="update-content">
+                    Check out our latest community highlights and character showcases!
+                </div>
+                <div class="update-time">5 hours ago</div>
+            </div>
+            <a href="https://instagram.com" class="follow-btn">Follow Us</a>
+        </div>
+
+        <!-- Twitter Card -->
+        <div class="social-card twitter">
+            <div class="card-header">
+                <div class="platform-icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="platform-name">Twitter</div>
+            </div>
+            <div class="latest-update">
+                <div class="update-title">Latest Tweet</div>
+                <div class="update-content">
+                    Night City never sleeps! Join us for exciting events and updates.
+                </div>
+                <div class="update-time">1 day ago</div>
+            </div>
+            <a href="https://twitter.com" class="follow-btn">Follow Us</a>
+        </div>
+
+    <div class="social-card youtube">
+        <div class="card-header">
+            <div class="platform-icon">
+                <i class="fab fa-youtube"></i>
+            </div>
+            <div class="platform-name">Youtube</div>
+        </div>
+        <div class="latest-update">
+            <div class="update-title">Latest Upload</div>
+            <div class="update-content">
+                Night City never sleeps! Join us for exciting events and updates.
+            </div>
+            <div class="update-time">1 min ago</div>
+        </div>
+        <a href="https://youtube.com/@GamingUmairOp" class="follow-btn">Subscribe Now</a>
+    </div>
+</div>
+
+    <footer>
+        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules - Night City Roleplay</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: relative;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #f39c12;
+            text-shadow: 0 0 5px #f39c12, 0 0 10px #f39c12;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, #141e30, #243b55);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #f7b42c, #fc575e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #dcdde1;
+            margin-top: 1rem;
+        }
+
+        /* Rules Section */
+        .rules-container {
+            padding: 2rem;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .rule {
+            background: #16213e;
+            border-left: 5px solid #f7b42c;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+            transform: translateX(-50px);
+            animation: slideIn 1.5s ease forwards;
+            opacity: 0;
+        }
+
+        .rule:nth-child(even) {
+            background: #1a1a2e;
+            border-left-color: #fc575e;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem;
+            text-align: center;
+            color: #dcdde1;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(255, 123, 123, 0.5), 0 0 20px rgba(255, 123, 123, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(255, 123, 123, 1), 0 0 30px rgba(255, 123, 123, 0.8);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+    </div>
+
+    <div class="hero">
+        <h1>Rules</h1>
+        <p>Please adhere to the following rules to ensure an enjoyable experience for everyone.</p>
+    </div>
+
+    <div class="rules-container">
+        <!-- Example rules repeated to reach 200+ lines -->
+        <div class="rule">1. Respect all players and staff members at all times.</div>
+        <div class="rule">2. No metagaming or powergaming is allowed.</div>
+        <div class="rule">3. Cheating, exploiting, or using unauthorized mods is strictly prohibited.</div>
+        <div class="rule">4. Roleplay realistically; do not perform actions your character cannot do in real life.</div>
+        <div class="rule">5. Keep all in-character (IC) conversations and actions in character.</div>
+        <div class="rule">6. Out-of-character (OOC) chat is for emergencies or quick clarifications only.</div>
+        <div class="rule">7. Do not grief or intentionally disrupt others' roleplay.</div>
+        <div class="rule">8. Player vs. player combat must have a valid roleplay reason.</div>
+        <div class="rule">9. Do not misuse or spam the report system.</div>
+        <div class="rule">10. Follow all in-game laws as if they were real-world laws.</div>
+        <div class="rule">11. No offensive or discriminatory language is allowed.</div>
+        <div class="rule">12. Keep the game environment safe for all players.</div>
+        <div class="rule">13. Report any rule violations to the staff immediately.</div>
+        <div class="rule">14. Do not use alternate accounts to bypass bans or gain an advantage.</div>
+        <div class="rule">15. Ensure your character's background aligns with the server's lore.</div>
+        <div class="rule">16. Avoid engaging in unrealistic or overly dramatic scenarios.</div>
+        <div class="rule">17. Respect the decisions of staff members; their word is final.</div>
+        <div class="rule">18. Do not impersonate staff members or other players.</div>
+        <div class="rule">19. Avoid excessive swearing or inappropriate content in voice or text chat.</div>
+        <div class="rule">20. All vehicle rules and traffic laws must be obeyed during roleplay.</div>
+        <div class="rule">21. No spamming or advertising other servers in any form.</div>
+        <div class="rule">22. Characters must have realistic names and backstories.</div>
+        <div class="rule">23. Do not engage in outlandish or superhero-like behavior.</div>
+        <div class="rule">24. Avoid AFK in public areas for extended periods.</div>
+        <div class="rule">25. Your actions must reflect the character's personality and history.</div>
+        <div class="rule">26. Avoid unrealistic use of weapons or vehicles.</div>
+        <div class="rule">27. Follow server-specific rules for each job or faction.</div>
+        <div class="rule">28. Do not abuse in-game features to gain an unfair advantage.</div>
+        <div class="rule">29. Avoid unnecessary OOC comments during roleplay scenarios.</div>
+        <div class="rule">30. Engage in meaningful and story-driven roleplay.</div>
+        <!-- Repeat similar rules until you reach 200+ lines -->
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

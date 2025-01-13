@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Night City Roleplay</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary: #ff0066;
+            --secondary: #00ffff;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 1rem;
+            background: rgba(26, 26, 26, 0.98);
+        }
+
+        .navbar a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            animation: gradientShift 10s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 0.1; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideDown 1s ease-out;
+            text-shadow: 0 0 10px rgba(255,0,102,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: scroll;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255,0,102,0.2);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1004;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .cart-content {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .cart-modal.active .cart-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+            margin: 0 1rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-item:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: right;
+        }
+
+        .checkout-btn {
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .checkout-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .close-cart {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-cart:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        /* Shop Closed Modal */
+        .shop-closed-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1005;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .shop-closed-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .shop-closed-content {
+            background: var(--dark);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+
+        .shop-closed-modal.active .shop-closed-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .shop-closed-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .product-card p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .product-card button {
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .product-card button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .product-card button:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Cart Badge */
+        .cart-badge {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .cart-badge:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(26, 26, 26, 0.95);
+            color: var(--light);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            z-index: 1002;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.9);
+            z-index: 1003;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--secondary);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#shop">Shop</a>
+        <!-- <a href="#about">About</a> -->
+    </div>
+
+    <div class="cart-badge">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+    </div>
+
+    <div class="hero">
+        <h1>Night City Shop</h1>
+        <p>Purchase in-game items and boosts to enhance your experience!</p>
+    </div>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="https://go-brides.net/wp-content/uploads/2023/01/hot_indiangirls_242512520_885529699025985_6682352914653961168_n-e1674132762287-1024x962.jpg" alt="HOTTY 1">
+            <h3>Exclusive Weapon Pack</h3>
+            <p>Dominate the streets with our exclusive weapon pack.</p>
+            <button onclick="addToCart(this)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/A102j8YjmOL.png" alt="HOTTY 2">
+            <h3>Luxury Vehicle</h3>
+            <p>Stand out with a luxury vehicle in Night City.</p>
+            <button onclick="addToCart(this)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="https://preview.redd.it/whc8yjksfe541.jpg?width=640&crop=smart&auto=webp&s=16493cae68bfe4ce6442ba5684d0f5050f52d413" alt="HOTTY 3">
+            <h3>VIP Access</h3>
+            <p>Enjoy exclusive features with VIP Access.</p>
+            <button onclick="addToCart(this)">Buy Now</button>
+        </div>
+    </div>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-cart" onclick="toggleCart()">×</button>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <h3>Total: <span id="cartTotal">$0</span></h3>
+                <button class="checkout-btn" onclick="attemptCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Closed Modal -->
+    <div class="shop-closed-modal" id="shopClosedModal">
+        <div class="shop-closed-content">
+            <i class="fas fa-store-slash shop-closed-icon"></i>
+            <h2>Shop Currently Closed</h2>
+            <p>We apologize for the inconvenience. The shop is currently not open for purchases.</p>
+            <button class="checkout-btn" onclick="closeShopClosedModal()">Return to Shopping</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Item added to cart!</div>
+
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Cart functionality
+        let cartCount = 0;
+        const cartBadge = document.getElementById('cart-count');
+        const toast = document.getElementById('toast');
+        const loadingSpinner = document.querySelector('.loading-spinner');
+
+        function addToCart(button) {
+            button.disabled = true;
+            loadingSpinner.style.display = 'flex';
+
+            // Simulate loading
+            setTimeout(() => {
+                cartCount++;
+                cartBadge.textContent = cartCount;
+                
+                // Show toast notification
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+
+                loadingSpinner.style.display = 'none';
+                button.disabled = false;
+            }, 800);
+        }
+
+        // Product card hover effect
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        let cart = [];
+        const products = [
+            { id: 1, name: "Exclusive Weapon Pack", price: 299.99, image: "https://go-brides.net/wp-content/uploads/2023/01/hot_indiangirls_242512520_885529699025985_6682352914653961168_n-e1674132762287-1024x962.jpg" },
+            { id: 2, name: "Luxury Vehicle", price: 499.99, image: "https://m.media-amazon.com/images/I/A102j8YjmOL.png" },
+            { id: 3, name: "VIP Access", price: 199.99, image: "https://preview.redd.it/whc8yjksfe541.jpg?width=640&crop=smart&auto=webp&s=16493cae68bfe4ce6442ba5684d0f5050f52d413" }
+        ];
+
+        function addToCart(button) {
+            const card = button.parentElement;
+            const productName = card.querySelector('h3').textContent;
+            const product = products.find(p => p.name === productName);
+
+            button.disabled = true;
+            loadingSpinner.style.display = 'flex';
+
+            setTimeout(() => {
+                cart.push(product);
+                updateCartBadge();
+                showToast('Item added to cart!');
+                
+                loadingSpinner.style.display = 'none';
+                button.disabled = false;
+            }, 800);
+        }
+
+        function updateCartBadge() {
+            cartBadge.textContent = cart.length;
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            } else {
+                updateCartDisplay();
+                modal.classList.add('active');
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart-message">Your cart is empty</div>';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">$${item.price}</div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            updateCartDisplay();
+            showToast('Item removed from cart');
+        }
+
+        function attemptCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            toggleCart();
+            const shopClosedModal = document.getElementById('shopClosedModal');
+            shopClosedModal.classList.add('active');
+        }
+
+        function closeShopClosedModal() {
+            const shopClosedModal = document.getElementById('shopClosedModal');
+            shopClosedModal.classList.remove('active');
+        }
+
+        // Cart badge click handler
+        document.querySelector('.cart-badge').addEventListener('click', toggleCart);
+
+        // Close modal when clicking outside
+        document.querySelector('.cart-modal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('cart-modal')) {
+                toggleCart();
+            }
+        });
+
+        document.querySelector('.shop-closed-modal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('shop-closed-modal')) {
+                closeShopClosedModal();
+            }
+        });
+    </script>
+</body>
+</html>

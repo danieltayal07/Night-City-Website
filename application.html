@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form - Night City Roleplay</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Modern Cyberpunk Theme Variables */
+:root {
+    --neon-pink: #ff2d55;
+    --neon-blue: #0af;
+    --neon-purple: #b829ff;
+    --dark-bg: #0a0a0f;
+    --glass-bg: rgba(16, 16, 32, 0.7);
+    --text-primary: #fff;
+    --text-secondary: #99e9ff;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 45, 85, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 170, 255, 0.1) 0%, transparent 50%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Background Lines */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 49%,
+        rgba(255, 255, 255, 0.02) 50%,
+        transparent 51%,
+        transparent 100%
+    );
+    background-size: 4px 100%;
+    pointer-events: none;
+    animation: scanlines 8s linear infinite;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Navigation Bar */
+/* Right-side Navbar Styles */
+.navbar {
+    position: fixed;
+    display: grid;
+    width: 7%;
+    height: 20%;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--glass-bg);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    animation: slideLeft 0.5s ease-out;
+}
+
+.navbar a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar a:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-5px);
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    height: 0;
+    background: var(--neon-blue);
+    transition: height 0.3s ease;
+}
+
+.navbar a:hover::before {
+    height: 100%;
+}
+
+/* Main Heading */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: glowText 2s ease-in-out infinite alternate;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+    border-radius: 2px;
+}
+
+/* Form Container */
+#applicationForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.8s ease-out;
+    transform-origin: center;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideRight 0.5s ease forwards;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+    transform: scale(1.01);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: scroll;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 45, 85, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
+
+button:hover::after {
+    animation: shine 1s forwards;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shine {
+    to {
+        left: 150%;
+    }
+}
+
+@keyframes glowText {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+                     0 0 20px rgba(255, 45, 85, 0.3),
+                     0 0 30px rgba(0, 170, 255, 0.3);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                     0 0 40px rgba(255, 45, 85, 0.5),
+                     0 0 60px rgba(0, 170, 255, 0.5);
+    }
+}
+
+@keyframes scanlines {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    #applicationForm {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .navbar {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+}
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translate(50px, -50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, -50%);
+    }
+}
+
+/* Add responsive styles for navbar */
+@media (max-width: 768px) {
+    .navbar {
+        right: 10px;
+        padding: 15px;
+    }
+    
+    .navbar a {
+        font-size: 1em;
+        padding: 6px 12px;
+    }
+}
+
+
+/* Form Validation Styles */
+input:invalid, textarea:invalid {
+    border-color: var(--neon-pink);
+}
+
+input:valid, textarea:valid {
+    border-color: #00ff9d;
+}
+
+/* Loading State */
+button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+button.loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+    </div>
+    <h1>Application Form</h1>
+    <form id="applicationForm">
+        <label for="username">Discord Username:(Should be in discord)</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="16" max="80"required><br><br>
+        
+        <label for="experience">"How familiar are you with roleplay?(on a scale 1-10)"</label>
+        <input type="number" id="experience" name="experience" min="1" max="10" required><br><br>
+        
+        <label for="reason">What Roleplay would you do in Night City and how? (Explain briefly for faster allowlisting)</label><br>
+        <textarea id="reason" name="reason" rows="4" required></textarea><br><br>
+        
+        <button type="submit">Submit Application</button>
+    </form>
+    <script src="script.js"></script>
+
+    <footer>
+        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

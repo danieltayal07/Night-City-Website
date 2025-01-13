@@ -1,0 +1,329 @@
+/* styles.css */
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    animation: backgroundFade 10s infinite alternate;
+}
+
+.navbar {
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    animation: slideInDown 1s;
+}
+
+.navbar a {
+    color: #e6e6e6;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+    animation: pulse 2s infinite;
+}
+
+.navbar a:hover {
+    background: #444;
+    transform: scale(1.1);
+}
+
+footer {
+    background-color: #1a1a1a;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #ccc;
+    animation: fadeInUp 1.5s;
+}
+
+/* Page-specific Styles */
+.content {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.content h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s;
+    background: linear-gradient(#ff8c00, #ff0080);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: textGlow 3s infinite;
+}
+
+.content p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    animation: fadeIn 2.5s;
+}
+
+.content button {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    animation: zoomIn 2s;
+}
+
+.content button:hover {
+    background: #666;
+    transform: scale(1.2);
+    animation: shake 0.5s;
+}
+
+/* About Us Animations */
+.animated-header {
+    font-size: 3rem;
+    text-align: center;
+    color: #ff8c00;
+    animation: fadeInDown 2s, textGlow 3s infinite alternate;
+}
+
+.animated-text {
+    font-size: 1.2rem;
+    margin: 20px auto;
+    max-width: 800px;
+    animation: slideInLeft 2s, fadeIn 3s;
+}
+
+.image-container {
+    text-align: center;
+    margin: 30px 0;
+    animation: zoomIn 2s;
+}
+
+.animated-image {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #444;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    animation: pulse 2s infinite;
+}
+
+.animated-image:hover {
+    transform: scale(1.05);
+    border-color: #ff8c00;
+}
+
+.mission {
+    background: rgba(255, 140, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
+    animation: fadeInUp 2s;
+}
+
+footer {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    animation: fadeIn 3s;
+}
+
+#applicationForm {
+    display: grid;
+    flex-direction: row;
+    width: 30%;
+    height: 20%;
+}
+
+#username {
+    border-radius: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#age{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+/* Blinking Cursor Animation */
+@keyframes blink {
+    0% {
+        border-right: 2px solid #0f0;
+    }
+    50% {
+        border-right: 2px solid transparent;
+    }
+    100% {
+        border-right: 2px solid #0f0;
+    }
+}
+
+/* Hide content while loading */
+body.loading .content {
+    display: none;
+}
+
+#experience{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+#reason {
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+/* Keyframes for Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundFade {
+    from {
+        background: #0f0f0f;
+    }
+    to {
+        background: #1c1c1c;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px #ff8c00, 0 0 10px #ff0080;
+    }
+    100% {
+        text-shadow: 0 0 15px #ff8c00, 0 0 25px #ff0080;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25%, 75% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+/* @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+} */
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
