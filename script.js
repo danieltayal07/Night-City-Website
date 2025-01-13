@@ -86,25 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const applicationForm = document.getElementById('applicationForm');
 
+    // Check if the form has already been submitted
+    if (localStorage.getItem('formSubmitted') === 'true') {
+        alert('You have already submitted the form.');
+        applicationForm.style.display = 'none'; // Optionally hide the form
+        return;
+    }
+
     applicationForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // Get form values directly from elements for more reliable data collection
         const username = document.querySelector('[name="username"]').value.trim();
         const age = document.querySelector('[name="age"]').value.trim();
         const experience = document.querySelector('[name="experience"]').value.trim();
         const reason = document.querySelector('[name="reason"]').value.trim();
 
-        // Log form data for debugging
-        console.log('Form Data:', { username, age, experience, reason });
-
-        // Simple validation to ensure no empty fields
         if (!username || !age || !experience || !reason) {
             alert('Please fill in all fields.');
             return;
         }
 
-        // Prepare the Discord webhook payload
         const payload = {
             content: null,
             embeds: [{
@@ -120,9 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }]
         };
 
-        console.log('Payload:', payload);  // Log payload for debugging
-
-        // Send the payload to Discord
         try {
             const response = await fetch("https://discord.com/api/webhooks/1328308033599574017/34NISFywac6N_qt87OID0xLY0dAjUuc857rNSkD4JuWfjuH-oIDUmGC8KdPb3T_VN9Jw", {
                 method: 'POST',
@@ -130,21 +128,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(payload)
             });
 
-            // Check the response status
             if (response.ok) {
                 alert('Application submitted successfully!');
+                localStorage.setItem('formSubmitted', 'true'); // Mark as submitted
                 applicationForm.reset();
+                applicationForm.style.display = 'none'; // Optionally hide the form
             } else {
-                const responseText = await response.text();  // Read the response body
-                console.error('Error:', responseText);  // Log response for debugging
                 alert('Failed to submit application. Please try again.');
             }
         } catch (error) {
-            console.error('Error:', error);  // Log error for debugging
+            console.error('Error:', error);
             alert('An error occurred. Please try again.');
         }
     });
 });
+
 
 document.getElementById("home-link").addEventListener("click", function () {
     window.location.href = "index.html";
