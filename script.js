@@ -146,3 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.getElementById("home-link").addEventListener("click", function () {
+    window.location.href = "index.html";
+});
+document.getElementById("about-link").addEventListener("click", function () {
+    window.location.href = "about.html";
+});
