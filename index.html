@@ -234,7 +234,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1500px;
             margin: 0 auto;
         }
 
@@ -278,11 +278,10 @@
         }
 
         .video-container {
-            max-width: 800px;
+            max-width: 1300px;
             margin: 0 auto;
             background: var(--dark);
             border-radius: 15px;
-            overflow: hidden;
             position: relative;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
         }
@@ -336,7 +335,32 @@
                 transform: translateY(0);
             }
         }
+        .stats-section {
+            background: rgba(0, 72, 124, 0.2);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
 
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 20, 147, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
         /* Footer */
         footer {
             background: rgba(0, 11, 24, 0.9);
@@ -365,11 +389,11 @@
 <body>
     <div class="navbar">
         <a href="application.html">Apply</a>
-        <a href="shop.html">Shop</a>
+     <!--   <a href="shop.html">Shop</a> -->
         <a href="socials.html">Socials</a>
         <a href="rules.html">Rules</a>
-        <a href="about.html">About</a>
-        <a href="fivem://connect/your-server-ip" class="enter-button">Enter Night City</a>
+        <!-- <a href="about.html">About</a> -->
+        <a href="fivem://connect/your-server-ip" class="enter-button">STATUS 🔴</a>
     </div>
     
     <div class="hero" style="position: relative; text-align: center; color: white;">
@@ -383,14 +407,13 @@
             <p style="margin: 30px; font-size: 2.2em;">Where the night meets adventure!</p>
         </div>
     </div>
-    
 
     <section class="feature-section">
         <h2 class="feature-title">Our Features</h2>
         <div class="feature-grid">
             <div class="feature-card">
                 <img src="https://img.gta5-mods.com/q75/images/mp-female-custom-character-lin-menyoo/d47f1f-lin9.jpg" alt="Custom Characters">
-                <h3>Custom Characters</h3>
+                <h3>Personalised Characters</h3>
                 <p>Create your unique identity in Night City with our advanced character customization system.</p>
             </div>
             <div class="feature-card">
@@ -407,31 +430,54 @@
     </section>
 
     <section class="video-section">
-        <h2 class="feature-title">Latest Gameplay</h2>
+        <h2 class="feature-title">Latest Content</h2>
         <div class="video-container">
             <div class="video-placeholder">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FmLlJg2bf8s?si=iqW8RAa_c2ireSO7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1jTOoEdCgfc?si=tQAc_I_UIPXfx4TO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
+        
     </section> 
 
     <section class="feature-section">
-        <h2 class="feature-title">Game Mechanics</h2>
+        <h2 class="feature-title">What we offer</h2>
         <div class="feature-grid">
             <div class="feature-card">
-                <img src="/images/Screenshot 2025-01-13 at 9.11.52 PM.png" alt="Combat System">
-                <h3>Advanced Combat</h3>
-                <p>Experience fluid combat mechanics with realistic damage and weapon systems.</p>
+                <img src="/images/m4h04b98nng11.jpg" alt="Combat System">
+                <h3>Custom RP Creation with Admin Support</h3>
+                <p>Players can collaborate with admins to design personalized roleplay scenarios, unique story arcs, and special in-game events tailored to their characters.</p>
             </div>
             <div class="feature-card">
-                <img src="/images/Screenshot 2025-01-13 at 9.13.41 PM.png" alt="Jobs System">
-                <h3>Dynamic Jobs</h3>
-                <p>Choose from various professions and build your career in Night City.</p>
+                <img src="/images/images.jpeg" alt="Jobs System">
+                <h3>Dynamic City Evolution</h3>
+                <p>The world of Night City Roleplay changes based on player actions, with evolving crime factions, shifting power dynamics, and new businesses opening or shutting down based on in-game events.</p>
             </div>
             <div class="feature-card">
-                <img src="https://r2.fivemanage.com/acP9u7gLziIbHCwCT6NVX/properties_allscripts-tgg.webp" alt="Property System">
-                <h3>Property Ownership</h3>
-                <p>Own and customize properties across the city, from apartments to businesses.</p>
+                <img src="/images/Screenshot 2025-02-14 at 4.40.26 PM.png" alt="Property System">
+                <h3>Exclusive Player-Owned Businesses</h3>
+                <p>Players can own and manage custom businesses with dynamic supply chains, employee management, and economy-driven profits.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <h2 class="feature-title">Server Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <p>Active Players</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3+</div>
+                <p>Active Factions (gangs/families)</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <p>Custom Jobs</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <p>Active Staff</p>
             </div>
         </div>
     </section>
