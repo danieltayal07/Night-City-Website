@@ -86,10 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const applicationForm = document.getElementById('applicationForm');
 
-    // Check if the form has already been submitted
     if (localStorage.getItem('formSubmitted') === 'true') {
         alert('You have already submitted the form.');
-        applicationForm.style.display = 'none'; // Optionally hide the form
+        applicationForm.style.display = 'none';
         return;
     }
 
@@ -99,26 +98,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.querySelector('[name="username"]').value.trim();
         const age = document.querySelector('[name="age"]').value.trim();
         const experience = document.querySelector('[name="experience"]').value.trim();
-        const reason = document.querySelector('[name="reason"]').value.trim();
+        let reason = document.querySelector('[name="reason"]').value.trim();
 
         if (!username || !age || !experience || !reason) {
             alert('Please fill in all fields.');
             return;
         }
 
+        // Split reason into chunks of 1024 characters (Discord embed limit)
+        const reasonChunks = [];
+        while (reason.length > 0) {
+            reasonChunks.push(reason.substring(0, 1024));
+            reason = reason.substring(1024);
+        }
+
+        const embeds = [{
+            title: "New Application Submission",
+            color: 3447003,
+            fields: [
+                { name: "Discord Username", value: username, inline: false },
+                { name: "Age", value: age, inline: false },
+                { name: "Roleplay Knowledge", value: `${experience} /10`, inline: false },
+                { name: "Roleplay Plan (Part 1):", value: reasonChunks[0], inline: false }
+            ],
+            timestamp: new Date().toISOString(),
+        }];
+
+        // Add additional embeds if the reason is too long
+        for (let i = 1; i < reasonChunks.length; i++) {
+            embeds.push({
+                title: `Roleplay Plan (Part ${i + 1}):`,
+                color: 3447003,
+                fields: [{ name: "Continued:", value: reasonChunks[i], inline: false }],
+                timestamp: new Date().toISOString(),
+            });
+        }
+
         const payload = {
             content: null,
-            embeds: [{
-                title: "New Application Submission",
-                color: 3447003,
-                fields: [
-                    { name: "Discord Username", value: username, inline: false },
-                    { name: "Age", value: age, inline: false },
-                    { name: "Roleplay Knowledge", value: `${experience} /10`, inline: false },
-                    { name: "Roleplay Plan:", value: reason, inline: false }
-                ],
-                timestamp: new Date().toISOString(),
-            }]
+            embeds: embeds
         };
 
         try {
@@ -130,9 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 alert('Application submitted successfully!');
-                localStorage.setItem('formSubmitted', 'true'); // Mark as submitted
+                localStorage.setItem('formSubmitted', 'true');
                 applicationForm.reset();
-                applicationForm.style.display = 'none'; // Optionally hide the form
+                applicationForm.style.display = 'none';
             } else {
                 alert('Failed to submit application. Please try again.');
             }
@@ -142,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 document.getElementById("home-link").addEventListener("click", function () {
