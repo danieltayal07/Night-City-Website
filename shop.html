@@ -105,16 +105,18 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 5rem;
+            margin-bottom: 8rem;
             animation: slideDown 1s ease-out;
             text-shadow: 0 0 10px rgba(255,0,102,0.5);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
+            max-width: 100000px;
             animation: fadeIn 1s ease-out 0.5s both;
+            font-size: 3rem;
+            text-shadow: 0 0 10px rgb(0, 187, 255);
+            margin-bottom: 1.2rem;
         }
 
         /* Product Grid */
@@ -519,28 +521,53 @@
     </div>
 
     <div class="hero">
-        <h1>Night City Shop</h1>
-        <p>Purchase in-game items and boosts to enhance your experience!</p>
+        <h1>Night City Catalogue</h1>
+        <p>The Alpha Premiere Pack Is Out Now !!</p>
+        <p>Check out the Catalogue Below, alpha premiere contains all 3 of the below presented items</p>
+        <p>⬇️</p>
     </div>
-
     <div class="product-grid">
         <div class="product-card">
-            <img src="https://go-brides.net/wp-content/uploads/2023/01/hot_indiangirls_242512520_885529699025985_6682352914653961168_n-e1674132762287-1024x962.jpg" alt="HOTTY 1">
-            <h3>Exclusive Weapon Pack</h3>
-            <p>Dominate the streets with our exclusive weapon pack.</p>
-            <button onclick="addToCart(this)">Buy Now</button>
+            <img src="/images/lkjahjdcnhadhmkuahmucidmnauwichmdiua-removebg-preview.png" alt=" 1">
+            <h3>Car Dealership</h3>
+            <p>
+                <ul>
+                    <li>PDM Ownership: Gain unparalleled control with full PDM ownership. Run every vehicle sold in the city, dominate the car market, and secure your spot at the top of your district.</li><br>
+                    <li>Real Money Earning Opportunity: Sell exclusive, 1-of-1 cars and earn high commissions on each deal, turning your passion into a profitable venture.</li><br>
+                    <li>Content Creation & Recognition: Stand out with unique role-play scenarios and creative content opportunities. We’ll help you craft engaging RP experiences that capture attention and elevate your brand.</li><br>
+                    <li>Investment Return Potential: Sell enough exclusive vehicles and watch your initial investment come back to you, making your dealership not only fun but also financially rewarding.</li><br>
+                    <li>Future Earnings Expansion: Stay tuned for even more innovative real money-making opportunities that we’re planning to introduce, ensuring your dealership always has the edge in the market.</li><br>
+                </ul>
+            </p>
+            <button onclick="addToCart(this)">Buy Now (Rs 5999)</button>
         </div>
         <div class="product-card">
-            <img src="https://m.media-amazon.com/images/I/A102j8YjmOL.png" alt="HOTTY 2">
-            <h3>Luxury Vehicle</h3>
-            <p>Stand out with a luxury vehicle in Night City.</p>
-            <button onclick="addToCart(this)">Buy Now</button>
+            <img src="/images/njhbhjbahjbdjhabk.jpg" alt=" 2">
+            <h3>Starting 1-of-1 Vehicle</h3>
+            <p>
+                <ul>
+                    <li>Exclusivity and Uniqueness: Own a one-of-a-kind vehicle with a design that sets you apart from the rest—this asset is as rare as it is impressive.</li><br>
+                    <li>Lucrative Investment Opportunity: With its unmatched rarity, this vehicle holds significant resale and commission potential, making it a smart investment for dedicated sellers.</li><br>
+                    <li>Enhanced Role-Playing and Content Creation: Leverage this exclusive ride as the centerpiece for immersive role-play scenarios and innovative content, boosting your reputation in the community.</li><br>
+                    <li>You can choose through the vehicle catalogue uploaded on discord</li><br>
+                    <li>Sole Ownership Guaranteed: Enjoy the ultimate exclusivity—only you will own this vehicle, making it a unique asset in the city. No one else will have the privilege, ensuring that your ride stands unrivaled and unmistakably yours.</li><br>
+                </ul>
+            </p>
+            <button onclick="addToCart(this)">Buy Now (Rs 349)</button>
         </div>
         <div class="product-card">
-            <img src="https://preview.redd.it/whc8yjksfe541.jpg?width=640&crop=smart&auto=webp&s=16493cae68bfe4ce6442ba5684d0f5050f52d413" alt="HOTTY 3">
-            <h3>VIP Access</h3>
-            <p>Enjoy exclusive features with VIP Access.</p>
-            <button onclick="addToCart(this)">Buy Now</button>
+            <img src="/images/48ba3e692c162f30594cf9f18fcff6d4-removebg-preview.png" alt=" 3">
+            <h3>Low - Mid Tier House</h3>
+            <p>
+                <ul>
+                    <li>Affordable Entry into Home Ownership: Step into the real estate market with a budget-friendly house designed for those looking to invest without overspending.</li><br>
+                    <li>Solid Foundation for Future Growth: This home offers a reliable base that serves as a stepping stone to upscale properties as you build your portfolio.</li><br>
+                    <li>Stand Out from the Crowd: Secure your own home and get ahead of others—no more living in caravans or under bridges. Enjoy a permanent, proud residence that sets you apart from the rest.</li><br>
+                    <li>Host Unforgettable House Parties: Throw epic parties in your own space—flex your unique home to create buzz and produce exclusive content that elevates your status in Night City.</li><br>
+                    <li>Enhance Your Narrative: Integrate this house into your personal journey—let it be a cornerstone that enriches your backstory and weaves deep, compelling lore into your rise in Night City.</li><br>
+                </ul>
+            </p>
+            <button onclick="addToCart(this)">Buy Now (only available with the alpha premiere pack)</button>
         </div>
     </div>
 
@@ -550,7 +577,7 @@
             <h2>Your Cart</h2>
             <div id="cartItems"></div>
             <div class="cart-total">
-                <h3>Total: <span id="cartTotal">$0</span></h3>
+                <h3>Total: <span id="cartTotal">Rs 0</span></h3>
                 <button class="checkout-btn" onclick="attemptCheckout()">Proceed to Checkout</button>
             </div>
         </div>
@@ -573,7 +600,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Night City Roleplay. All Rights Reserved.</p>
+        <p>We want to make our city completely non-biased that is why no different opportunities will be provided to the buyers, they will be treated same in rp by us</p>
     </footer>
 
     <script>
@@ -634,15 +661,16 @@
         });
         let cart = [];
         const products = [
-            { id: 1, name: "Exclusive Weapon Pack", price: 299.99, image: "https://go-brides.net/wp-content/uploads/2023/01/hot_indiangirls_242512520_885529699025985_6682352914653961168_n-e1674132762287-1024x962.jpg" },
-            { id: 2, name: "Luxury Vehicle", price: 499.99, image: "https://m.media-amazon.com/images/I/A102j8YjmOL.png" },
-            { id: 3, name: "VIP Access", price: 199.99, image: "https://preview.redd.it/whc8yjksfe541.jpg?width=640&crop=smart&auto=webp&s=16493cae68bfe4ce6442ba5684d0f5050f52d413" }
+            { id: 1, name: "Car Dealership", price: 299.99, image: "" },
+            { id: 2, name: "Luxury Vehicle", price: 499.99, image: "" },
+            { id: 3, name: "VIP Access", price: 199.99, image: "" }
         ];
 
         function addToCart(button) {
             const card = button.parentElement;
             const productName = card.querySelector('h3').textContent;
             const product = products.find(p => p.name === productName);
+            window.location.href = 'https://discord.gg/vm8TdAEk';
 
             button.disabled = true;
             loadingSpinner.style.display = 'flex';
@@ -682,8 +710,8 @@
             const cartTotal = document.getElementById('cartTotal');
             
             if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="empty-cart-message">Your cart is empty</div>';
-                cartTotal.textContent = '$0.00';
+                cartItems.innerHTML = '<div class="empty-cart-message">Implementing this Feature soon!</div>';
+                cartTotal.textContent = '₹22,000';
                 return;
             }
 
