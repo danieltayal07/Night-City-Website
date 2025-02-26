@@ -1,0 +1,75 @@
+/* Overall page styling */
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header and Filter Buttons */
+  .catalogue-header {
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .catalogue-header h1 {
+    font-size: 3em;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  
+  .filter-buttons {
+    margin: 20px 0;
+  }
+  
+  .filter-buttons button {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .filter-buttons button:hover,
+  .filter-buttons button.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #ff4b2b;
+  }
+  
+  /* Vehicle grid styling */
+  .vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .vehicle {
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .vehicle img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s;
+  }
+  
+  .vehicle:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
