@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop - Night City Roleplay</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,10 +22,7 @@
             color: var(--light);
             overflow-x: hidden;
         }
-
-        /* Navbar Styles */
         .navbar {
-            position: fixed;
             top: 0;
             width: 100%;
             background: rgba(26, 26, 26, 0.95);
@@ -69,8 +63,6 @@
         .navbar a:hover::after {
             width: 100%;
         }
-
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -118,8 +110,6 @@
             text-shadow: 0 0 10px rgb(0, 187, 255);
             margin-bottom: 1.2rem;
         }
-
-        /* Product Grid */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -274,8 +264,6 @@
             color: var(--primary);
             transform: rotate(90deg);
         }
-
-        /* Shop Closed Modal */
         .shop-closed-modal {
             display: none;
             position: fixed;
@@ -405,8 +393,6 @@
             width: 200px;
             height: 200px;
         }
-
-        /* Cart Badge */
         .cart-badge {
             position: fixed;
             top: 1rem;
@@ -424,8 +410,6 @@
             background: var(--secondary);
             transform: scale(1.1);
         }
-
-        /* Footer */
         footer {
             background: rgba(26, 26, 26, 0.95);
             padding: 2rem;
@@ -449,8 +433,6 @@
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-
-        /* Animations */
         @keyframes slideDown {
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -460,8 +442,6 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -478,8 +458,6 @@
         .toast.show {
             transform: translateX(0);
         }
-
-        /* Loading Spinner */
         .loading-spinner {
             display: none;
             position: fixed;
@@ -511,8 +489,6 @@
 <body>
     <div class="navbar">
         <a href="index.html">Home</a>
-        <a href="#shop">Shop</a>
-        <!-- <a href="#about">About</a> -->
     </div>
 
     <div class="cart-badge">
