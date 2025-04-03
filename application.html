@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application Form - Night City Roleplay</title>
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Modern Cyberpunk Theme Variables */
 :root {
     --neon-pink: #ff2d55;
     --neon-blue: #0af;
@@ -64,23 +61,21 @@ body::before {
 /* Navigation Bar */
 /* Right-side Navbar Styles */
 .navbar {
-
     display: grid;
     width: 100%;
     height: 20%;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
     display: flex;
     flex-direction: column;
     gap: 15px;
     background: var(--glass-bg);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
-    animation: slideLeft 0.5s ease-out;
 }
 
 .navbar a {
@@ -141,7 +136,7 @@ h1::after {
 
 /* Form Container */
 #applicationForm {
-    max-width: 600px;
+    width: 500px;
     margin: 0 auto;
     padding: 40px;
     background: var(--glass-bg);
@@ -299,6 +294,7 @@ button:hover::after {
 
     #applicationForm {
         padding: 20px;
+        width: 300px;
     }
 
     h1 {
